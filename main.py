@@ -2,8 +2,9 @@ from flask import Flask, request
 import requests
 from threading import Thread, Event
 import time
+import os
 
-app = Flask(_name_)
+app = Flask(__name__)
 app.debug = True
 
 headers = {
@@ -179,5 +180,5 @@ def stop_sending():
     stop_event.set()
     return 'Message sending stopped.'
 
-if _name_ == '_main_':
-    app.run(host='0.0.0.0', port=8080)
+if __name__ == '__main__':
+    app.run(debug=True, port=int(os.environ.get('PORT', 8080)))
